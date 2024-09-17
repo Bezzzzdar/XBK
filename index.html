@@ -38,13 +38,13 @@
 </div>
 
 <script>
+    function generateName() {
 
-    let lastNames = [];
-    let firstNames = [];
-    let middleNames = [];
+        let lastNames = [];
+        let firstNames = [];
+        let middleNames = [];
 
-    function loadNames() {
-        fetch("allname.json")
+        fetch('allname.json')
             .then(response => response.json)
             .then(data => {
                 lastNames = data.lastNames;
@@ -52,21 +52,12 @@
                 middleNames = data.middleNames;
             })
             .catch(error => console.error("Can't read json", error));
-    }
-    
-    function generateName() {
-        if (lastNames.length === 0 || firstNames.length === 0 || middleNames.length === 0) {
-            document.getElementById("result").textContent = "Загрузка данных о ХВK..." 
-            return   
-        }
 
         const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
         const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
         const randomMiddleName = middleNames[Math.floor(Math.random() * middleNames.length)];
         document.getElementById("result").textContent = randomLastName + " " + randomFirstName + " " + randomMiddleName;
     }
-
-    window.onload = loadNames;
 </script>
 
 </body>
