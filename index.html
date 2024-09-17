@@ -41,16 +41,18 @@
 
     let lastNames = [];
     let firstNames = [];
-    let middleNames = []
+    let middleNames = [];
 
-    fetch("allname.json")
-        .then(response => response.json)
-        .then(data => {
-            lastNames = data.lastname;
-            firstNames = data.firstNames;
-            middleNames = data.middleNames;
-        })
-        .catch(error => console.error("Can't read json"), error);
+    function loadNames() {
+        fetch("allname.json")
+            .then(response => response.json)
+            .then(data => {
+                lastNames = data.lastname;
+                firstNames = data.firstNames;
+                middleNames = data.middleNames;
+            })
+            .catch(error => console.error("Can't read json", error));
+    }
     
     function generateName() {
         if (lastNames.length === 0 || firstNames.length === 0 || middleNames.length === 0) {
@@ -63,6 +65,8 @@
         const randomMiddleName = middleNames[Math.floor(Math.random() * middleNames.length)];
         document.getElementById("result").textContent = randomLastName + " " + randomFirstName + " " + randomMiddleName;
     }
+
+    window.onload = loadNames;
 </script>
 
 </body>
