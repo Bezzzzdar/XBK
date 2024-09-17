@@ -39,17 +39,13 @@
 
 <script>
 
-    let lastNames = [];
-    let firstNames = [];
-    let middleNames = [];
-
     function loadNames() {
         fetch("allname.json")
             .then(response => response.json)
             .then(data => {
-                lastNames = data.lastname;
-                firstNames = data.firstNames;
-                middleNames = data.middleNames;
+                const lastNames = data.lastname;
+                const firstNames = data.firstNames;
+                const middleNames = data.middleNames;
             })
             .catch(error => console.error("Can't read json", error));
     }
