@@ -38,16 +38,26 @@
 </div>
 
 <script>
-    const lastNames = ["Хоттабыч", "Хубабуллин", "Хотспотуллин", "Хореографуллин", "Хайлатуллин", "Хамелеонуллин", "Хайпуллин", "Хитроспуллин", "Хлеборезуллин", "Хлопотуллин", "Xолостуллин",
-                        "Хомякуллин", "Хрипуллин", "Хромуллин", "Хрипотцуллин", "Хрусталин", "Храпуллин", "Халтурин", "Хренуллин"];
 
-    const firstNames = ["Велосипед", "Вклад", "Валун", "Вандал", "Валидол", "Вартандер", "Варкрафт", "Валорант", "Вагонет", "Вантуз", "Ватикан", "Варган", "Варяг", "Воландеморт"];
+    let lastNames = [];
+    let firstNames = [];
+    let middleNames = []
 
-    const middleNames = ["Курганович", "Калейдоскопович", "Куртизанович", "Курганович", "Крутонович", "Каштанович", "Кафтанович", "Кумарович", "Квадроберович", "Кабриолетович", 
-                        "Комбайнович", "Кабинетович", "Кальянович", "Камнепадович", "Каркарыч", "Круассанович", "Калибрович", "Криперович", "Кредитович", "Кракенович", "Кортизолович",
-                        "Каламбурович", "Кириешкович", "Капустович", "Крастикрабович", "Крафтович"];
+    fetch("allname.json")
+        .then(response => response.json)
+        .then(data => {
+            lastNames = data.lastname;
+            firstNames = data.firstNames;
+            middleNames = data.middleNames;
+        })
+        .catch(error => console.error("Can't read json"), error);
     
     function generateName() {
+        if (lastNames.length === 0 || firstNames.length === 0 || middleNames.length === 0) {
+            document.getElementById("result").textContent = "Загрузка данных о ХВK..." 
+            return   
+        }
+
         const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
         const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
         const randomMiddleName = middleNames[Math.floor(Math.random() * middleNames.length)];
