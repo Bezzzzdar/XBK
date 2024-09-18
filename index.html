@@ -50,12 +50,12 @@
                 firstNames = data.firstNames;
                 middleNames = data.middleNames;
             })
-            .catch(error => console.error('Ошибка при чтении JSON:', error));
+            .catch(error => console.error('Cannot read json', error));
     }
 
     function generateName() {
         if (lastNames.length === 0 || firstNames.length === 0 || middleNames.length === 0) {
-            document.getElementById("result").textContent = "Загрузка данных...";
+            document.getElementById("result").textContent = "Загрузка данных о ХВК...";
             return;
         }
         const randomlastName = lastNames[Math.floor(Math.random() * lastNames.length)];
